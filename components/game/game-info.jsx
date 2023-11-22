@@ -23,7 +23,7 @@ export function GameInfo({ className }) {
 
       <div className="flex gap-3 items-center">
         <div className="text-orange-500 text-lg font-semibold">01:08</div>
-        <div className="h-6 w-px bg-slate-200 mr-2"></div>
+        <div className="h-6 w-px bg-slate-200 "></div>
         <div className="relative">
           <Profile className="w-44" />
           <div className="w-5 h-5 rounded-full bg-white shadow absolute -left-1 -top-1 flex items-center justify-center">

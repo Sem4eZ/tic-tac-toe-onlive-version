@@ -12,7 +12,7 @@ export function Profile({ className }) {
     >
       <Image src={avatarSrc} width={48} height={48} alt="avatar" unoptimized />
       <div>
-        <div className=" text-lg leading-tight">Fedorov</div>
+        <div className="text-lg leading-tight">Fedorov</div>
         <div className="text-slate-400 text-xs leading-tight">
           Рейтинг: 1500
         </div>

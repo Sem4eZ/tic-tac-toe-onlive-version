@@ -96,9 +96,9 @@ function PlayerInfo({ playerInfo, isRight, isTimerRunning, onTimeOver }) {
 
   const getTimerColor = () => {
     if (isTimerRunning) {
-      return isDanger ? "text-orange-600" : "text-slate-900";
+      return isDanger ? "text-orange-500" : "text-slate-900";
     }
-    return "text-slate-200";
+    return "text-slate-500";
   };
 
   return (

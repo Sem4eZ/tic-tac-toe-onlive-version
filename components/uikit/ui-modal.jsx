@@ -1,15 +1,6 @@
-import clsx from "clsx";
 import { createPortal } from "react-dom";
-
-/**
- * @param {{
- *   width: "md" | "full",
- *   isOpen: boolean,
- *   className: string,
- *   onClose: Function
- * }} props
- * @returns
- */
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 export function UiModal({
   width = "md",
@@ -18,19 +9,34 @@ export function UiModal({
   isOpen = false,
   onClose,
 }) {
-  const handleClick = (e) => {
-    const inModal = e.target.closest("[data-id=modal]");
-    if (inModal) return;
-    onClose();
-  };
+  const [modalContainer, setModalContainer] = useState(null);
 
-  if (!isOpen) {
+  useEffect(() => {
+    // Check if we are on the client side before using document
+    if (typeof window !== "undefined") {
+      const modalRoot = document.getElementById("modals");
+      const container = document.createElement("div");
+      modalRoot.appendChild(container);
+      setModalContainer(container);
+
+      return () => {
+        modalRoot.removeChild(container);
+      };
+    }
+  }, []); // Run this effect only once on component mount
+
+  if (!isOpen || !modalContainer) {
     return null;
   }
 
   const modal = (
     <div
-      onClick={handleClick}
+      onClick={(e) => {
+        const inModal = e.target.closest("[data-id=modal]");
+        if (!inModal) {
+          onClose();
+        }
+      }}
       className={clsx(
         "fixed inset-0 bg-slate-900/60 backdrop-blur pt-10 pb-10 overflow-auto",
         className,
@@ -62,7 +68,11 @@ export function UiModal({
     </div>
   );
 
-  return createPortal(modal, document.getElementById("modals"));
+  if (typeof window !== "undefined") {
+    return createPortal(modal, modalContainer);
+  } else {
+    return null;
+  }
 }
 
 UiModal.Header = function UiModalHeader({ children, className }) {

@@ -19,7 +19,7 @@ import { computeWinnerSymbol } from "./model/compute-winner-symbol";
 import { computePlayerTimer } from "./model/compute-player-timer";
 import { useInterval } from "../lib/timers";
 
-const PLAYERS_COUNT = 4;
+const PLAYERS_COUNT = 2;
 
 export function Game() {
   const [gameState, dispatch] = useReducer(
@@ -70,7 +70,7 @@ export function Game() {
         gameInfo={
           <GameInfo
             isRatingGame
-            playersCount={3}
+            playersCount={4}
             timeMode={"1 минута на ход"}
           />
         }

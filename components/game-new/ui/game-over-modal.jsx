@@ -2,19 +2,15 @@ import { UiButton } from "../../uikit/ui-button";
 import { UiModal } from "../../uikit/ui-modal";
 import { useState, useEffect } from "react";
 
-export function GameOverModal({ winnerName, players, onRestartGame  }) {
+export function GameOverModal({ winnerName, players, onRestartGame }) {
   const [isModalOpen, setIsModalOpen] = useState(!!winnerName);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    if (onRestartGame) {
-      onRestartGame();
-    }
-
+    window.location.reload();
   };
 
   useEffect(() => {
-    // Обновляем состояние isModalOpen при изменении winnerName
     setIsModalOpen(!!winnerName);
   }, [winnerName]);
 
@@ -31,7 +27,6 @@ export function GameOverModal({ winnerName, players, onRestartGame  }) {
           {players}
         </div>
       </UiModal.Body>
-      <UiModal.Footer></UiModal.Footer>
     </UiModal>
   );
 }
